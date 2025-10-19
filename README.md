@@ -1,119 +1,194 @@
-### 🚗 Chicago Traffic Crash Cause Prediction
-Introduction
+# BUMPER-TO-BUMPER!🚗💥 
+## A DIVE INTO CHICAGO ACCIDENTS DATASET
 
-This project analyzes the factors influencing vehicle crashes in Chicago using machine learning. The goal is to build a predictive model that identifies the primary contributory cause of a car accident based on vehicle, environmental, and roadway conditions. The insights from this project aim to help the City of Chicago and road safety agencies make data-driven decisions to reduce crash frequency and severity.
+<img src="image.jpg" width="500">
 
-### Business Problem
 
-Traffic accidents remain a major public safety concern in Chicago, resulting in injuries, fatalities, and significant economic loss. Understanding the underlying causes of these accidents is essential for improving road safety, urban planning, and public awareness.
+#  👥 **GROUP MEMBERS**
 
-This project focuses on predicting the primary contributory cause of traffic crashes — such as driver error, weather, or road design — using historical data. By identifying patterns and high-risk conditions, city authorities can design targeted interventions, allocate enforcement resources effectively, and prevent future crashes.
+## 💻 VICKER IVY 
+## 📊 VICTOR ONGAKI  
+## 🧠 ROSE MATOKE 
+## 🤖 FELIX MUSAU
+## 🧩 DAISY KERUBO THOMAS
 
-### Methodology
-### Data Source
 
-The dataset was obtained from the City of Chicago Data Portal, containing nearly 1 million crash records with detailed information about:
+# PROJECT SUMMARY
+This group project focused on building a machine learning model to predict the primary contributory cause of road accidents based on historical crash data. The main objective was to use data-driven methods to identify key factors that lead to accidents and support strategies for improving road safety. The project involved data cleaning, exploratory analysis, feature engineering, and model development using algorithms such as Decision Tree and Random Forest Classifiers. The model revealed that driver-related factors, including improper overtaking and failure to yield, were among the leading causes of accidents.
 
-Road and weather conditions
+## 1. 👔BUSINESS UNDERSTANDING
 
-Lighting and traffic control devices
+According to this [article](https://www.who.int/news-room/fact-sheets/detail/road-traffic-injuries) by the World Health Organization Published on 13th December 2023, approximately the lives of  1.19 million people are cut short every year as a result of a road traffic crash. Between 20 and 50 million more people suffer non-fatal injuries, with many incurring a disability.
 
-Crash types, severity, and timing
+In Chicago, thousands of traffic crashes occur every year, resulting in significant human, social, and economic costs. City authorities and transportation planners aim to reduce crash frequency and severity by identifying the key factors contributing to these incidents  such as driver behavior, road conditions, weather, lighting, and time of day.
 
-Vehicle and injury details
+The WHO  projects that without more significant intervention, road traffic crashes will become the fifth leading cause of death globally by 2030. By leveraging these tools, CDOT can more accurately identify high-risk conditions, problematic locations, and behavioral trends, enabling targeted interventions. This data-driven approach will support the design of more effective traffic safety policies, infrastructure improvements, and public awareness campaigns aimed at reducing traffic-related injuries and fatalities in Chicago.
 
-### Data Cleaning
+## 2. ✍️BUSINESS PROBLEM
+In the city of Chicago, the number of reported cases of accidents has increased rapidly over the years. This pattern has raised concerns to the Vehicle Safety Board whose interest is reducing traffic accidents in Chicago. The City of Chicago’s Department of Transportation (CDOT) has collected detailed data on reported vehicle crashes, including information on the vehicles involved, drivers and passengers, and environmental conditions at the time of the accident. 
 
-Removed irrelevant columns such as LOCATION, LATITUDE, LONGITUDE, and DATE_POLICE_NOTIFIED.
+By effectively predicting the main cause behind crashes, the city can strategically focus its resources and efforts to reduce traffic incidents.This data-driven approach empowers the city to maximize impact on traffic safety by addressing root causes and concentrating efforts where they matter most.
 
-Standardized column names and string formats (trimmed whitespace, converted to uppercase).
+# 3. 📋OBJECTIVES
 
-Handled missing values: categorical features filled with "Unknown", numerical with the median.
+## 3.1 Main objective
+1. Build a model that can predict the likelihood of accidents based on features.
 
-Encoded categorical variables using OneHotEncoder and scaled numeric features using StandardScaler.
+## 3.2 Specific objectives
+1. To determine how various factors e.g Weather conditions contribute  to road accidents.
+2. To analyze the relationship and patterns between time of day, day of the week and month of the year with Road accidents.
+3. To determine the most dangerous Locations.
+4. To establish the relationship between speed limit and fatality of injury.
+5. To identify conditions that most contribute to fatal outcomes such as crash type and the condition of traffic control devices.
 
-Removed duplicates and grouped rare causes under “OTHER” to reduce cardinality.
+## 3.3 🔎Research Questions
+1. What factors contribute to road accidents?
+2. How do crash frequencies vary across time (hour of day, day of week, month, or season)?
+3. What are the most dangerous locations?
+4. How does speeding correlate with crash severity?
+5. What are the effects of natural conditions to accidents?
 
-### Data Splitting
+## 3.3 👍Metric of success
+Our metric of success prioritizes the ability to clearly explain how the model identifies key accident causes over achieving the highest possible accuracy.
 
-The data was split into:
+# 4. 📊DATA UNDERSTANDING
+This data was derived from the [Chicago Data Portal](https://data.cityofchicago.org/Transportation/Traffic-Crashes-Vehicles/68nd-jvt3/about_data). This dataset contains information about vehicles (or units as they are identified in crash reports) involved in a traffic crash. The data has approximately 993k rows and 48 columns. After cleaning and dropping irrelevant columns, this analysis will be using the following columns:
 
-Training set (70%)
+* `crash_date` – The date and time when the crash occurred.
 
-Validation set (15%)
+* `posted_speed_limit` – The speed limit (in mph) posted at the crash location.
 
-Test set (15%)
-using stratified sampling to preserve class balance.
+* `traffic_control_device` – The type of traffic control device present at the crash site (e.g., stop sign, traffic signal).
 
-### Modeling
+* `device_condition` – The condition of the traffic control device at the time of the crash.
 
-Multiple models were trained and compared, including:
+* `weather_condition` – The weather condition during the crash (e.g., clear, rain, snow).
 
-Decision Tree Classifier (baseline model)
+* `lighting_condition` – The lighting condition at the time of the crash (e.g., daylight, dark – no streetlights).
 
-Random Forest Classifier
+* `first_crash_type` – The type of initial impact or collision in the crash.
 
-Gradient Boosting & XGBoost
+* `trafficway_type` – The design or type of roadway where the crash occurred (e.g., one-way, divided highway).
 
-Neural Network (Keras Sequential Model) for improved performance
+* `alignment` – The road alignment where the crash occurred (e.g., straight, curve).
 
-Each model was evaluated using Accuracy, Precision, Recall, and F1-Score. The Neural Network used dropout and regularization to reduce overfitting.
+* `road_defect` – Any reported defect in the road that may have contributed to the crash.
 
-### Key Findings & Recommendations
-🔍 Insights
+* `crash_type` – A general classification of the crash (e.g., rear-end, sideswipe).
 
-Most crashes occurred during clear weather and daylight, indicating that driver behavior plays a larger role than environmental factors.
+* `date_police_notified` – The date when the police were notified about the crash.
 
-The most common causes included:
+* `prim_contributory_cause` – The primary cause determined to have contributed to the crash.
 
-Failing to yield the right-of-way
+* `sec_contributory_cause` – A secondary factor contributing to the crash.
 
-Following too closely
+* `street_no` – The street number where the crash occurred.
 
-Failing to reduce speed
+* `street_direction` – The compass direction (e.g., N, S, E, W) of the street where the crash occurred.
 
-Fridays and evening hours (3–6 PM) showed the highest crash frequencies.
+* `street_name` – The name of the street where the crash happened.
 
-Major intersections and high-speed zones had disproportionately high crash counts.
+* `num_units` – The number of vehicles or units involved in the crash.
 
-### 🚦 Recommendations
+* `most_severe_injury` – The most serious injury outcome from the crash (e.g., fatal, no injury).
 
-Enforcement & Awareness: Strengthen campaigns against speeding and right-of-way violations.
+* `injuries_total` – The total number of injuries reported in the crash.
 
-Infrastructure: Improve traffic signage, lane markings, and intersection lighting.
+* `latitude` – The geographic latitude coordinate of the crash location.
 
-Predictive Safety Monitoring: Deploy models citywide to flag high-risk intersections in real time.
+* `longitude` – The geographic longitude coordinate of the crash location.
 
-Targeted Patrols: Use model outputs to allocate traffic police and cameras to high-risk zones.
+* `location` – A combined geographic point (latitude and longitude) representing the crash site.
 
-### Technologies Used
+## 4.1 🚧Data Limitation
 
-Python – Core programming language
+**1.Categorical Complexity**
 
-Pandas / NumPy – Data cleaning and transformation
+Many categorical columns e.g.`TRAFFIC_CONTROL_DEVICE` `FIRST_CRASH_TYPE` have many levels or inconsistent labels like "UNKNOWN", "UNREPORTED", "OTHER".
+This increases data sparsity and may require encoding techniques (like one-hot encoding or target encoding) that can inflate feature space.
 
-Scikit-learn – Model training, preprocessing, and evaluation
+**2.Missing or Incomplete Data.**
 
-Imbalanced-learn (SMOTE) – Oversampling for imbalanced classes
+Some records have missing values in key columns such as `WEATHER_CONDITION`, `LIGHTING_CONDITION`, `ROADWAY_SURFACE_COND`,`INJURIES_TOTAL`, `INJURIES_FATAL`, etc.
 
-TensorFlow / Keras – Deep learning (Neural Network model)
+**3.Large Dataset**
 
-Matplotlib / Seaborn / Plotly – Data visualization and analytics
+It has close too 1M entries which makes it computationaly expensive to work with and build models with the data.
 
-Jupyter Notebook – Development and experimentation environment
 
-### Future Improvements
 
-Implement hyperparameter tuning using KerasTuner for automated optimization.
 
-Integrate geospatial analysis to visualize accident hotspots on city maps.
 
-Experiment with deep learning architectures (LSTM, CNN) to model time and spatial dependencies.
 
-Deploy as an interactive web dashboard for real-time crash risk monitoring and visualization.
 
+    
+
+
+### Model Performance Overview
+
+* In this analysis, we evaluated several classification models to determine the best fit for predicting traffic crash contributory causes. Below is a summary of the accuracy and key insights for each model:
+Conclusion
+
+### 1. Top Performer: XGBoost closely follows with an accuracy of 0.5932, showcasing resilience against overfitting and robust classification capabilities.
+
+### 2. Close Contender: The Neural Network achieved the highest accuracy (0.5745) among all models and demonstrated strong performance in classifying key categories. However, it exhibits some signs of overfitting.
+
+### 3. Next Best: Logistic Regression (0.6303) displayed reasonable performance but lacked robustness across other classes.
+
+### 4. Random Forest (0.5825) averagely identified Pedestrian/Cyclist Errors but struggled with minority classes.
+
+### 5. Decision Tree (SMOTE) performed poorly (0.5412), indicating that SMOTE did not effectively resolve class imbalance.
+
+## 5 Final Recommendation
+
+### Based on the analysis, the XGBOOST is recommended as the best model for predicting traffic crash causes, with Neural as a strong alternative. Future steps should include hyperparameter tuning to enhance model performance and mitigate overfitting, as well as employing model interpretability techniques to better understand decision-making processes.
+    
+![png](README_files/README_152_0.png)
+
+
+### Model Performance Overview
+
+* In this analysis, we evaluated several classification models to determine the best fit for predicting traffic crash contributory causes. Below is a summary of the accuracy and key insights for each model:
+Conclusion
+
+### 1. Top Performer: XGBoost closely follows with an accuracy of 0.5932, showcasing resilience against overfitting and robust classification capabilities.
+
+### 2. Close Contender: The Neural Network achieved the highest accuracy (0.5745) among all models and demonstrated strong performance in classifying key categories. However, it exhibits some signs of overfitting.
+
+### 3. Next Best: Logistic Regression (0.6303) displayed reasonable performance but lacked robustness across other classes.
+
+### 4. Random Forest (0.5825) averagely identified Pedestrian/Cyclist Errors but struggled with minority classes.
+
+### 5. Decision Tree (SMOTE) performed poorly (0.5412), indicating that SMOTE did not effectively resolve class imbalance.
+
+## Final Recommendation
+
+### Based on the analysis, the XGBOOST is recommended as the best model for predicting traffic crash causes, with Neural as a strong alternative. Future steps should include hyperparameter tuning to enhance model performance and mitigate overfitting, as well as employing model interpretability techniques to better understand decision-making processes.
+
+# 6 Conclusion 
 ### Conclusion
+* The project’s objective was to predict the primary causes of accidents to help traffic planners and policymakers design targeted interventions. Both the Neural Network and XGBoost models effectively captured critical accident causes, such as road conditions, time of day, and human behavior, aligning with the stakeholders’ need for actionable insights.
+* Neural Network achieved the highest accuracy (0.54) by learning complex, non-linear patterns from the data, helping identify nuanced relationships between variables. However, it exhibited overfitting, suggesting that further tuning is needed for consistent performance.
+* XGBoost followed closely with an accuracy of 0.59, providing robust performance without significant overfitting, making it a reliable alternative for practical applications.
+#### Insights on Contributory Causes:
 
-By leveraging machine learning and deep learning, this project demonstrates how predictive analytics can uncover the major factors contributing to traffic accidents in Chicago. These insights can empower city planners, law enforcement, and transportation agencies to design data-driven policies, improve public safety, and ultimately reduce crash-related injuries and fatalities.
+* Key features identified by the models, such as `road defects` and `day of the week`, `weather_condition`, `device_condition`, align with real-world safety concerns. This demonstrates that the models are not only predictive but also relevant to stakeholder needs.
+* These insights help city planners and safety boards focus on high-impact areas such as infrastructure repair (road defects) and time-based interventions (e.g., weekend traffic management).
 
-Through continued model tuning and integration with live data, this approach can form the foundation for an AI-powered traffic safety monitoring system for urban environments.
+### Handling Data Challenges:
+
+* Class Imbalance: Despite efforts like SMOTE, models such as Decision Tree and Random Forest struggled with minority classes, which reflects the complexity of accurately modeling rare accident causes.
+* The Neural Network and XGBoost outperformed other models by maintaining reasonable performance across different categories, demonstrating their ability to handle data imbalance better and complex features in the dataset though further improvement is still needed.
+
+# 7 Recommendations
+## Recommendations for Future Work
+
+* Hyperparameter Tuning: Further refine the Neural Network to address overfitting and unlock additional performance gains.
+* Feature Engineering: Explore new features, such as weather and traffic congestion interactions, to capture more nuanced relationships between accident causes.
+* Continuous Learning: As new data becomes available, retrain models periodically to maintain predictive relevance and adapt to changing traffic patterns.
+* Chicago traffic accidents are primarily driven by human factors (driver error) occurring during peak traffic hours (Friday afternoons) in standard urban zones (30 mph speed limits) and ideal environmental conditions (daylight, clear weather). The high volume of "UNABLE TO DETERMINE" primary causes is a significant data quality issue that limits precise root-cause analysis.
+### Recommendations To Stakeholders
+* The stakeholders should put focus more on hotspot areas such as `traffic control devices`, `traffic way type` 
+* Implement satellite check-in and decentralized passenger drop-off with dedicated, enforced lanes for transit and rideshare to drastically reduce private vehicle congestion and queuing within the immediate concourse area.
+* Implement clearer and mandatory protocols for crash reporting officers to minimize "UNABLE TO DETERMINE" as a primary cause. This is critical for future data-driven policy decisions.
+* Conduct a full safety engineering review of the O'Hare International Airport crash cluster (Rank 1 hotspot) to identify and rectify any underlying road design or signage flaws that contribute to the extremely high crash frequency.

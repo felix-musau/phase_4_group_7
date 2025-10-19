@@ -3,3 +3,4 @@
 "*.pyc" 
 ".DS_Store" 
 "*.log" 
+".ipynb_checkpoints/" 
